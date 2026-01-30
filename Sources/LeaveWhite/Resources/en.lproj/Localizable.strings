@@ -1,0 +1,68 @@
+"app.name" = "LeaveWhite";
+
+"root.locked.title" = "LeaveWhite";
+"root.locked.subtitle" = "Unlock to access";
+"root.unlock.button" = "Unlock";
+
+"tab.dashboard" = "Guardian";
+"tab.vault" = "Vault";
+"tab.echo" = "Echo";
+
+"dashboard.guardian" = "Guardian";
+"dashboard.safe" = "Protected";
+"dashboard.warning" = "Check-in needed";
+"dashboard.triggered" = "Triggered";
+"dashboard.days" = "days";
+
+"common.placeholder" = "—";
+
+"vault.title" = "Asset Vault";
+"vault.search.placeholder" = "Search";
+"vault.add" = "Add";
+"vault.mode.toggle" = "Decoy";
+"vault.mode.real" = "Real";
+"vault.mode.decoy" = "Decoy";
+"vault.new" = "New Asset";
+"vault.save" = "Save";
+"vault.cancel" = "Cancel";
+"vault.field.title" = "Title";
+"vault.field.tags" = "Tags (comma-separated)";
+"vault.field.hint" = "Search hint (no secrets)";
+"vault.field.content" = "Content (encrypted)";
+"vault.field.kind" = "Type";
+"vault.field.beneficiary" = "Beneficiary";
+"vault.field.trigger" = "Trigger policy";
+"vault.trigger.deliver" = "Deliver";
+"vault.trigger.destroy" = "Destroy on trigger";
+"vault.kind.account" = "Account";
+"vault.kind.password" = "Password";
+"vault.kind.note" = "Note";
+"vault.kind.file" = "File";
+"vault.kind.cryptoSeed" = "Mnemonic";
+"vault.kind.socialLegacy" = "Social";
+"vault.kind.timeLetter" = "Letter";
+"vault.kind.legalWill" = "Will";
+"vault.kind.aiMemory" = "AI";
+"vault.kind.healthDirective" = "Health";
+"vault.detail.decrypting" = "Decrypting…";
+"vault.detail.locked" = "Locked";
+
+"echo.title" = "EchoChronos";
+"echo.new" = "New Letter";
+"echo.editor.title" = "Write to the future";
+"echo.editor.subject" = "Title";
+"echo.editor.content" = "Body (encrypted)";
+"echo.editor.preview" = "Preview";
+"echo.editor.edit" = "Edit";
+"echo.editor.release" = "Release date";
+"echo.editor.daysAhead" = "Days ahead";
+"echo.save" = "Save";
+"echo.cancel" = "Cancel";
+"echo.sending" = "Sending…";
+"echo.sent" = "Sent";
+"echo.pending" = "Pending";
+
+"error.biometricUnavailable" = "Biometrics unavailable";
+"error.biometricFailed" = "Authentication failed";
+"error.locked" = "Please unlock first";
+"error.unknown" = "Unknown error";

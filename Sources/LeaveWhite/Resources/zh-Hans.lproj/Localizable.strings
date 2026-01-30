@@ -1,0 +1,68 @@
+"app.name" = "留白";
+
+"root.locked.title" = "留白";
+"root.locked.subtitle" = "解锁以进入保险箱";
+"root.unlock.button" = "解锁";
+
+"tab.dashboard" = "守护";
+"tab.vault" = "保险箱";
+"tab.echo" = "时空余响";
+
+"dashboard.guardian" = "守护状态";
+"dashboard.safe" = "守护中";
+"dashboard.warning" = "需要打卡";
+"dashboard.triggered" = "已触发";
+"dashboard.days" = "天";
+
+"common.placeholder" = "—";
+
+"vault.title" = "资产保险箱";
+"vault.search.placeholder" = "搜索标题、标签或提示";
+"vault.add" = "新增";
+"vault.mode.toggle" = "伪装";
+"vault.mode.real" = "真实";
+"vault.mode.decoy" = "伪装";
+"vault.new" = "新建资产";
+"vault.save" = "保存";
+"vault.cancel" = "取消";
+"vault.field.title" = "标题";
+"vault.field.tags" = "标签（逗号分隔）";
+"vault.field.hint" = "检索提示（不含敏感信息）";
+"vault.field.content" = "内容（将被加密）";
+"vault.field.kind" = "类型";
+"vault.field.beneficiary" = "受益人";
+"vault.field.trigger" = "触发策略";
+"vault.trigger.deliver" = "交付";
+"vault.trigger.destroy" = "触发即销毁";
+"vault.kind.account" = "账号";
+"vault.kind.password" = "密码";
+"vault.kind.note" = "感悟";
+"vault.kind.file" = "文件";
+"vault.kind.cryptoSeed" = "助记词";
+"vault.kind.socialLegacy" = "社交托管";
+"vault.kind.timeLetter" = "时空信件";
+"vault.kind.legalWill" = "电子遗嘱";
+"vault.kind.aiMemory" = "AI 备份";
+"vault.kind.healthDirective" = "健康联动";
+"vault.detail.decrypting" = "解密中…";
+"vault.detail.locked" = "未解锁";
+
+"echo.title" = "时空余响";
+"echo.new" = "新建信件";
+"echo.editor.title" = "写一封给未来的信";
+"echo.editor.subject" = "标题";
+"echo.editor.content" = "正文（将被加密）";
+"echo.editor.preview" = "预览";
+"echo.editor.edit" = "编辑";
+"echo.editor.release" = "释放日期";
+"echo.editor.daysAhead" = "距离今天";
+"echo.save" = "保存";
+"echo.cancel" = "取消";
+"echo.sending" = "发送中…";
+"echo.sent" = "已发送";
+"echo.pending" = "待发送";
+
+"error.biometricUnavailable" = "设备暂不支持生物识别";
+"error.biometricFailed" = "验证失败，请重试";
+"error.locked" = "请先解锁";
+"error.unknown" = "发生未知错误";
