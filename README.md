@@ -1,5 +1,7 @@
 # 🛡️ LeaveWhite
 
+[![CI](https://github.com/xmgzxmgz/LeaveWhite/actions/workflows/ci.yml/badge.svg)](https://github.com/xmgzxmgz/LeaveWhite/actions/workflows/ci.yml)
+
 > 一款注重隐私的安全日记与紧急响应应用，基于 AES-256-GCM 加密和生物认证保护您的数据。
 
 ## ✨ 功能特性
