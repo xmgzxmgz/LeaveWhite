@@ -1,5 +1,6 @@
 import CryptoKit
 import Foundation
+import os
 
 public actor VaultKeyManager {
     public struct KeyDescriptor: Sendable {
@@ -37,6 +38,7 @@ public actor VaultKeyManager {
                 try keychain.upsertData(raw, service: descriptor.service, account: descriptor.account)
                 return key
             }
+            LWLog.security.error("VaultKeyManager.getOrCreateKey failed: \(error, privacy: .public)")
             throw error
         }
     }

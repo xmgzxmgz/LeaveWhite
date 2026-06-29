@@ -225,21 +225,6 @@ struct VaultEntryEditorSheet: View {
             .foregroundStyle(Theme.textPrimary.opacity(0.75))
     }
 
-    private var toolbarPlacementTrailing: ToolbarItemPlacement {
-        #if os(iOS)
-        return .topBarTrailing
-        #else
-        return .automatic
-        #endif
-    }
-
-    private var toolbarPlacementLeading: ToolbarItemPlacement {
-        #if os(iOS)
-        return .topBarLeading
-        #else
-        return .automatic
-        #endif
-    }
 }
 
 struct VaultEntryCard: View {

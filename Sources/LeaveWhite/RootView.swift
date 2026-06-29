@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import LeaveWhiteCore
+import os
 
 struct RootView: View {
     @Environment(\.modelContext) private var modelContext
@@ -44,6 +45,7 @@ struct RootView: View {
             do {
                 try modelContext.save()
             } catch {
+                LWLog.app.error("Failed to save initial profile: \(error, privacy: .public)")
             }
         }
 
@@ -87,6 +89,7 @@ struct RootView: View {
         do {
             try modelContext.save()
         } catch {
+            LWLog.app.error("Failed to save lastSeen update: \(error, privacy: .public)")
         }
     }
 }

@@ -66,3 +66,7 @@
 "error.biometricFailed" = "验证失败，请重试";
 "error.locked" = "请先解锁";
 "error.unknown" = "发生未知错误";
+"error.encryptionFailed" = "加密失败";
+"error.decryptionFailed" = "解密失败";
+"error.saveFailed" = "保存失败，请重试";
+"error.storageError" = "存储错误";

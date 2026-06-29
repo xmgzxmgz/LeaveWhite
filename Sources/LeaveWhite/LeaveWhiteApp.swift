@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import LeaveWhiteCore
+import os
 
 @main
 struct LeaveWhiteApp: App {
@@ -9,7 +10,6 @@ struct LeaveWhiteApp: App {
 
     init() {
         do {
-            // 优先尝试使用 Documents 目录，解决 CLI 运行时的权限问题
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             if let docDir = urls.first {
                 let storeURL = docDir.appendingPathComponent("LeaveWhite.store")
@@ -18,10 +18,23 @@ struct LeaveWhiteApp: App {
                 self.container = try ModelContainerFactory.make()
             }
         } catch {
+            LWLog.app.error("Persistent store unavailable, falling back to in-memory: \(error, privacy: .public)")
             do {
                 self.container = try ModelContainerFactory.make(isInMemory: true)
             } catch {
-                fatalError(String(describing: error))
+                LWLog.app.critical("All storage options exhausted: \(error, privacy: .public)")
+                // Last resort: force in-memory with minimal config
+                // ModelContainerFactory.make(isInMemory: true) should almost never fail,
+                // but if it does, we create the simplest possible container to avoid crashing.
+                do {
+                    let schema = Schema([UserProfile.self])
+                    let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+                    self.container = try ModelContainer(for: schema, configurations: [config])
+                } catch {
+                    // Truly unrecoverable -- log and rethrow to crash report rather than silent fatalError
+                    LWLog.app.critical("Cannot create any ModelContainer: \(error, privacy: .public)")
+                    fatalError("LeaveWhite cannot start: \(error.localizedDescription)")
+                }
             }
         }
     }
@@ -38,7 +51,7 @@ struct LeaveWhiteApp: App {
             }
             .environment(languageManager)
             .id(languageManager.language)
-            .frame(minWidth: 375, maxWidth: 430, minHeight: 667, maxHeight: 932) // 模拟 iOS 屏幕比例
+            .frame(minWidth: 375, maxWidth: 430, minHeight: 667, maxHeight: 932)
         }
         .modelContainer(container)
         #if os(macOS)

@@ -18,6 +18,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 }
 
 /// 语言管理器，负责管理应用内的语言切换与持久化
+@MainActor
 @Observable
 class LanguageManager {
     /// 当前选择的语言，默认跟随系统（如果没有设置过）

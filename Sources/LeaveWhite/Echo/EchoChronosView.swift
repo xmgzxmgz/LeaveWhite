@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import LeaveWhiteCore
+import os
 
 struct EchoChronosView: View {
     @Bindable var security: SecurityManager
@@ -93,14 +94,6 @@ struct EchoChronosView: View {
         }
     }
 
-    private var toolbarPlacementTrailing: ToolbarItemPlacement {
-        #if os(iOS)
-        return .topBarTrailing
-        #else
-        return .automatic
-        #endif
-    }
-
     private func saveDraft(_ draft: EchoDraft) async {
         guard security.isUnlocked else { return }
         do {
@@ -118,6 +111,7 @@ struct EchoChronosView: View {
             try modelContext.save()
             isPresentingEditor = false
         } catch {
+            LWLog.engine.error("Failed to save echo message: \(error, privacy: .public)")
         }
     }
 
@@ -132,7 +126,8 @@ struct EchoChronosView: View {
             let data = try await security.decrypt(selectedMessage.contentEncrypted)
             decryptedContent = String(data: data, encoding: .utf8) ?? String(localized: "common.placeholder", bundle: .module)
         } catch {
-            decryptedContent = String(describing: error)
+            LWLog.engine.error("Echo decryption failed: \(error, privacy: .public)")
+            decryptedContent = String(localized: "error.unknown", bundle: .module)
         }
         isDecrypting = false
     }
@@ -151,6 +146,7 @@ struct EchoChronosView: View {
         do {
             try modelContext.save()
         } catch {
+            LWLog.engine.error("Failed to save dispatched messages: \(error, privacy: .public)")
         }
     }
 }
@@ -197,11 +193,15 @@ private struct EchoMessageCard: View {
             .opacity(message.isSent ? 0.55 : 1)
     }
 
+    private static let dateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .medium
+        f.timeStyle = .none
+        return f
+    }()
+
     private var dateText: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        return formatter.string(from: message.releaseAt)
+        Self.dateFormatter.string(from: message.releaseAt)
     }
 }
 

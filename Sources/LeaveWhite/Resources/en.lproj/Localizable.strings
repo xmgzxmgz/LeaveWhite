@@ -66,3 +66,7 @@
 "error.biometricFailed" = "Authentication failed";
 "error.locked" = "Please unlock first";
 "error.unknown" = "Unknown error";
+"error.encryptionFailed" = "Encryption failed";
+"error.decryptionFailed" = "Decryption failed";
+"error.saveFailed" = "Failed to save. Please try again.";
+"error.storageError" = "Storage error";

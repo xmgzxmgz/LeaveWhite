@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import LeaveWhiteCore
+import os
 
 struct VaultView: View {
     @Bindable var security: SecurityManager
@@ -255,7 +256,8 @@ struct VaultView: View {
             let plaintext = try await security.decrypt(selectedEntry.encryptedPayload)
             detailPlaintext = String(data: plaintext, encoding: .utf8) ?? String(localized: "common.placeholder", bundle: .module)
         } catch {
-            detailPlaintext = String(describing: error)
+            LWLog.vault.error("Decryption failed: \(error, privacy: .public)")
+            detailPlaintext = String(localized: "error.unknown", bundle: .module)
         }
         isDecrypting = false
     }
@@ -292,22 +294,7 @@ struct VaultView: View {
             try modelContext.save()
             isPresentingEditor = false
         } catch {
+            LWLog.vault.error("Failed to save vault entry: \(error, privacy: .public)")
         }
-    }
-
-    private var toolbarPlacementTrailing: ToolbarItemPlacement {
-        #if os(iOS)
-        return .topBarTrailing
-        #else
-        return .automatic
-        #endif
-    }
-
-    private var toolbarPlacementLeading: ToolbarItemPlacement {
-        #if os(iOS)
-        return .topBarLeading
-        #else
-        return .automatic
-        #endif
     }
 }

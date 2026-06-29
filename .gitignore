@@ -1,2 +1,49 @@
-/.build
-/.history
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+!default.xcworkspace
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# IDE
+.history/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets / Keys
+*.p12
+*.cer
+*.mobileprovision
+*.pem
+*.key
+
+# Misc
+*.log

@@ -27,5 +27,21 @@ extension View {
         self
         #endif
     }
+
+    var toolbarPlacementTrailing: ToolbarItemPlacement {
+        #if os(iOS)
+        return .topBarTrailing
+        #else
+        return .automatic
+        #endif
+    }
+
+    var toolbarPlacementLeading: ToolbarItemPlacement {
+        #if os(iOS)
+        return .topBarLeading
+        #else
+        return .automatic
+        #endif
+    }
 }
 

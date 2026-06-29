@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import LeaveWhiteCore
+import os
 
 struct DashboardView: View {
     @Bindable var security: SecurityManager
@@ -164,6 +165,7 @@ struct DashboardView: View {
             try modelContext.save()
             feedbackTrigger.toggle()
         } catch {
+            LWLog.app.error("Failed to save check-in: \(error, privacy: .public)")
         }
     }
 }

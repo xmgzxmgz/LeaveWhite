@@ -142,27 +142,15 @@ struct EchoEditorSheet: View {
         .platformSensoryImpact(trigger: feedback)
     }
 
+    private static let releaseDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .full
+        f.timeStyle = .none
+        return f
+    }()
+
     private var formattedReleaseDate: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .none
-        return formatter.string(from: draft.releaseAt)
-    }
-
-    private var toolbarPlacementTrailing: ToolbarItemPlacement {
-        #if os(iOS)
-        return .topBarTrailing
-        #else
-        return .automatic
-        #endif
-    }
-
-    private var toolbarPlacementLeading: ToolbarItemPlacement {
-        #if os(iOS)
-        return .topBarLeading
-        #else
-        return .automatic
-        #endif
+        Self.releaseDateFormatter.string(from: draft.releaseAt)
     }
 }
 
