@@ -2,7 +2,7 @@ import SwiftUI
 import LeaveWhiteCore
 
 struct MainTabView: View {
-    @Bindable var security: SecurityManager
+    var security: SecurityManager
 
     var body: some View {
         TabView {

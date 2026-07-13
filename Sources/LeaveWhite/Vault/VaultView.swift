@@ -4,7 +4,7 @@ import LeaveWhiteCore
 import os
 
 struct VaultView: View {
-    @Bindable var security: SecurityManager
+    var security: SecurityManager
     @Environment(\.modelContext) private var modelContext
 
     @Query(sort: \VaultEntry.updatedAt, order: .reverse) private var allEntries: [VaultEntry]
@@ -57,11 +57,11 @@ struct VaultView: View {
                                             .font(.system(size: 28, weight: .semibold))
                                             .foregroundStyle(Theme.gold)
 
-                                        Text(String(localized: "vault.title", bundle: .module))
+                                        Text("vault.title", bundle: .module)
                                             .font(.system(size: 17, weight: .semibold))
                                             .foregroundStyle(Theme.textPrimary)
 
-                                        Text(String(localized: "common.placeholder", bundle: .module))
+                                        Text("common.placeholder", bundle: .module)
                                             .foregroundStyle(Theme.textPrimary.opacity(0.55))
                                     }
                                     .frame(maxWidth: .infinity)
@@ -90,7 +90,7 @@ struct VaultView: View {
                     .transition(.opacity)
                 }
             }
-            .navigationTitle(String(localized: "vault.title", bundle: .module))
+            .navigationTitle(Text("vault.title", bundle: .module))
             .toolbar {
                 ToolbarItem(placement: toolbarPlacementTrailing) {
                     Button {

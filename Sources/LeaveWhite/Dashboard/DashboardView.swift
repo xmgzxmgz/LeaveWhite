@@ -4,7 +4,7 @@ import LeaveWhiteCore
 import os
 
 struct DashboardView: View {
-    @Bindable var security: SecurityManager
+    var security: SecurityManager
 
     @Environment(\.modelContext) private var modelContext
     @Query private var profiles: [UserProfile]
@@ -111,8 +111,6 @@ struct DashboardView: View {
                 .foregroundStyle(Theme.textPrimary)
 
             Spacer(minLength: 0)
-
-            LanguageMenu()
         }
         .padding(.horizontal, 18)
     }

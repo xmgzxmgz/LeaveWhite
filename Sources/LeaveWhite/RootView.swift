@@ -102,17 +102,10 @@ private struct LockedOverlay: View {
 
     var body: some View {
         VStack(spacing: 14) {
-            HStack {
-                Spacer()
-                LanguageMenu()
-            }
-            .padding(.top, 10)
-            .padding(.trailing, 20)
-
             Text("root.locked.title", bundle: .module)
                 .font(.system(size: 34, weight: .heavy, design: .rounded))
                 .foregroundStyle(Theme.textPrimary)
-                .padding(.top, 60)
+                .padding(.top, 120)
 
             Text("root.locked.subtitle", bundle: .module)
                 .font(.system(size: 15, weight: .light))

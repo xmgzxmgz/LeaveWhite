@@ -12,11 +12,11 @@ struct SecureFieldPlus: View {
             HStack(spacing: 10) {
                 Group {
                     if isRevealed {
-                        TextField(String(localized: String.LocalizationValue(placeholderKey), bundle: .module), text: $text)
+                        TextField("", text: $text, prompt: Text(LocalizedStringKey(placeholderKey), bundle: .module))
                             .platformTextInputAutocapitalizationNever()
                             .platformAutocorrectionDisabled()
                     } else {
-                        SecureField(String(localized: String.LocalizationValue(placeholderKey), bundle: .module), text: $text)
+                        SecureField("", text: $text, prompt: Text(LocalizedStringKey(placeholderKey), bundle: .module))
                             .platformTextInputAutocapitalizationNever()
                             .platformAutocorrectionDisabled()
                     }

@@ -33,7 +33,7 @@ struct VaultEntryDraft {
 }
 
 struct VaultEntryEditorSheet: View {
-    @Bindable var security: SecurityManager
+    var security: SecurityManager
     var beneficiaries: [Beneficiary]
     var onSave: (VaultEntryDraft) -> Void
 
@@ -48,10 +48,10 @@ struct VaultEntryEditorSheet: View {
                 VStack(spacing: 14) {
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            fieldHeader(String(localized: "vault.field.kind", bundle: .module))
+                            fieldHeader("vault.field.kind")
                             Picker("", selection: $draft.kind) {
                                 ForEach(AssetKind.allCases, id: \.rawValue) { kind in
-                                    Text(localizedKind(kind)).tag(kind)
+                                    Text(localizedKind(kind), bundle: .module).tag(kind)
                                 }
                             }
                             .pickerStyle(.segmented)
@@ -60,8 +60,8 @@ struct VaultEntryEditorSheet: View {
 
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            fieldHeader(String(localized: "vault.field.title", bundle: .module))
-                            TextField(String(localized: "vault.field.title", bundle: .module), text: $draft.title)
+                            fieldHeader("vault.field.title")
+                            TextField("", text: $draft.title, prompt: Text("vault.field.title", bundle: .module))
                                 .platformTextInputAutocapitalizationNever()
                                 .platformAutocorrectionDisabled()
                                 .padding(.horizontal, 12)
@@ -75,8 +75,8 @@ struct VaultEntryEditorSheet: View {
 
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            fieldHeader(String(localized: "vault.field.tags", bundle: .module))
-                            TextField(String(localized: "vault.field.tags", bundle: .module), text: $draft.tags)
+                            fieldHeader("vault.field.tags")
+                            TextField("", text: $draft.tags, prompt: Text("vault.field.tags", bundle: .module))
                                 .platformTextInputAutocapitalizationNever()
                                 .platformAutocorrectionDisabled()
                                 .padding(.horizontal, 12)
@@ -86,8 +86,8 @@ struct VaultEntryEditorSheet: View {
                                         .fill(Theme.secondaryBackground)
                                 )
 
-                            fieldHeader(String(localized: "vault.field.hint", bundle: .module))
-                            TextField(String(localized: "vault.field.hint", bundle: .module), text: $draft.hint)
+                            fieldHeader("vault.field.hint")
+                            TextField("", text: $draft.hint, prompt: Text("vault.field.hint", bundle: .module))
                                 .platformTextInputAutocapitalizationNever()
                                 .platformAutocorrectionDisabled()
                                 .padding(.horizontal, 12)
@@ -101,11 +101,11 @@ struct VaultEntryEditorSheet: View {
 
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            fieldHeader(String(localized: "vault.field.beneficiary", bundle: .module))
+                            fieldHeader("vault.field.beneficiary")
 
                             Picker("", selection: beneficiarySelectionBinding) {
-                                Text(String(localized: "common.placeholder", bundle: .module)).tag(UUID?.none)
-                                ForEach(beneficiaries) { b in
+                                Text("common.placeholder", bundle: .module).tag(UUID?.none)
+                                ForEach(beneficiaries, id: \.id) { b in
                                     Text(b.displayName).tag(Optional.some(b.id))
                                 }
                             }
@@ -115,23 +115,24 @@ struct VaultEntryEditorSheet: View {
 
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            fieldHeader(String(localized: "vault.field.trigger", bundle: .module))
+                            fieldHeader("vault.field.trigger")
 
                             Toggle(isOn: $draft.destroyOnTrigger) {
-                                Text(String(localized: "vault.trigger.destroy", bundle: .module))
+                                Text("vault.trigger.destroy", bundle: .module)
                                     .foregroundStyle(Theme.textPrimary)
                             }
                             .toggleStyle(.switch)
 
                             if draft.kind == .timeLetter {
                                 DatePicker(
-                                    String(localized: "vault.kind.timeLetter", bundle: .module),
                                     selection: Binding(
                                         get: { draft.releaseAt ?? Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now },
                                         set: { draft.releaseAt = $0 }
                                     ),
                                     displayedComponents: [.date]
-                                )
+                                ) {
+                                    Text("vault.kind.timeLetter", bundle: .module)
+                                }
                                 .datePickerStyle(.graphical)
                             }
                         }
@@ -139,7 +140,7 @@ struct VaultEntryEditorSheet: View {
 
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            fieldHeader(String(localized: "vault.field.content", bundle: .module))
+                            fieldHeader("vault.field.content")
 
                             if draft.kind == .password || draft.kind == .cryptoSeed {
                                 SecureFieldPlus(text: $draft.plaintext, placeholderKey: "vault.field.content")
@@ -160,18 +161,22 @@ struct VaultEntryEditorSheet: View {
                 .padding(18)
             }
             .background(Theme.background)
-            .navigationTitle(String(localized: "vault.new", bundle: .module))
+            .navigationTitle(Text("vault.new", bundle: .module))
             .toolbar {
                 ToolbarItem(placement: toolbarPlacementLeading) {
-                    Button(String(localized: "vault.cancel", bundle: .module)) {
+                    Button {
                         dismiss()
+                    } label: {
+                        Text("vault.cancel", bundle: .module)
                     }
                 }
 
                 ToolbarItem(placement: toolbarPlacementTrailing) {
-                    Button(String(localized: "vault.save", bundle: .module)) {
+                    Button {
                         saveFeedback.toggle()
                         onSave(draft)
+                    } label: {
+                        Text("vault.save", bundle: .module)
                     }
                     .disabled(!security.isUnlocked || draft.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
@@ -194,33 +199,33 @@ struct VaultEntryEditorSheet: View {
         )
     }
 
-    private func localizedKind(_ kind: AssetKind) -> String {
+    private func localizedKind(_ kind: AssetKind) -> LocalizedStringKey {
         switch kind {
         case .account:
-            return String(localized: "vault.kind.account", bundle: .module)
+            return "vault.kind.account"
         case .password:
-            return String(localized: "vault.kind.password", bundle: .module)
+            return "vault.kind.password"
         case .note:
-            return String(localized: "vault.kind.note", bundle: .module)
+            return "vault.kind.note"
         case .file:
-            return String(localized: "vault.kind.file", bundle: .module)
+            return "vault.kind.file"
         case .cryptoSeed:
-            return String(localized: "vault.kind.cryptoSeed", bundle: .module)
+            return "vault.kind.cryptoSeed"
         case .socialLegacy:
-            return String(localized: "vault.kind.socialLegacy", bundle: .module)
+            return "vault.kind.socialLegacy"
         case .timeLetter:
-            return String(localized: "vault.kind.timeLetter", bundle: .module)
+            return "vault.kind.timeLetter"
         case .legalWill:
-            return String(localized: "vault.kind.legalWill", bundle: .module)
+            return "vault.kind.legalWill"
         case .aiMemory:
-            return String(localized: "vault.kind.aiMemory", bundle: .module)
+            return "vault.kind.aiMemory"
         case .healthDirective:
-            return String(localized: "vault.kind.healthDirective", bundle: .module)
+            return "vault.kind.healthDirective"
         }
     }
 
-    private func fieldHeader(_ title: String) -> some View {
-        Text(title)
+    private func fieldHeader(_ title: LocalizedStringKey) -> some View {
+        Text(title, bundle: .module)
             .font(.system(size: 12, weight: .semibold))
             .foregroundStyle(Theme.textPrimary.opacity(0.75))
     }

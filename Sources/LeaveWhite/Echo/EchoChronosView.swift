@@ -4,7 +4,7 @@ import LeaveWhiteCore
 import os
 
 struct EchoChronosView: View {
-    @Bindable var security: SecurityManager
+    var security: SecurityManager
 
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \EchoMessage.releaseAt, order: .forward) private var messages: [EchoMessage]
@@ -40,7 +40,7 @@ struct EchoChronosView: View {
                                         .font(.system(size: 28, weight: .semibold))
                                         .foregroundStyle(Theme.gold)
 
-                                    Text(String(localized: "echo.new", bundle: .module))
+                                    Text("echo.new", bundle: .module)
                                         .font(.system(size: 17, weight: .semibold))
                                         .foregroundStyle(Theme.textPrimary)
                                 }
@@ -66,7 +66,7 @@ struct EchoChronosView: View {
                     )
                 }
             }
-            .navigationTitle(String(localized: "echo.title", bundle: .module))
+            .navigationTitle(Text("echo.title", bundle: .module))
             .toolbar {
                 ToolbarItem(placement: toolbarPlacementTrailing) {
                     Button {

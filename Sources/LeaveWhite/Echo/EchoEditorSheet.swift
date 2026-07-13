@@ -14,7 +14,7 @@ struct EchoDraft {
 }
 
 struct EchoEditorSheet: View {
-    @Bindable var security: SecurityManager
+    var security: SecurityManager
     var onSave: (EchoDraft) -> Void
 
     @Environment(\.dismiss) private var dismiss
@@ -30,11 +30,11 @@ struct EchoEditorSheet: View {
                 VStack(spacing: 14) {
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text(String(localized: "echo.editor.subject", bundle: .module))
+                            Text("echo.editor.subject", bundle: .module)
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundStyle(Theme.textPrimary.opacity(0.75))
 
-                            TextField(String(localized: "echo.editor.subject", bundle: .module), text: $draft.subject)
+                            TextField("", text: $draft.subject, prompt: Text("echo.editor.subject", bundle: .module))
                                 .platformTextInputAutocapitalizationNever()
                                 .platformAutocorrectionDisabled()
                                 .padding(.horizontal, 12)
@@ -49,7 +49,7 @@ struct EchoEditorSheet: View {
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
-                                Text(String(localized: "echo.editor.content", bundle: .module))
+                                Text("echo.editor.content", bundle: .module)
                                     .font(.system(size: 12, weight: .semibold))
                                     .foregroundStyle(Theme.textPrimary.opacity(0.75))
 
@@ -60,7 +60,7 @@ struct EchoEditorSheet: View {
                                         isPreviewing.toggle()
                                     }
                                 } label: {
-                                    Text(isPreviewing ? String(localized: "echo.editor.edit", bundle: .module) : String(localized: "echo.editor.preview", bundle: .module))
+                                    Text(isPreviewing ? "echo.editor.edit" : "echo.editor.preview", bundle: .module)
                                         .font(.system(size: 12, weight: .semibold))
                                         .foregroundStyle(Theme.gold)
                                 }
@@ -91,12 +91,12 @@ struct EchoEditorSheet: View {
 
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text(String(localized: "echo.editor.release", bundle: .module))
+                            Text("echo.editor.release", bundle: .module)
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundStyle(Theme.textPrimary.opacity(0.75))
 
                             HStack {
-                                Text(String(localized: "echo.editor.daysAhead", bundle: .module))
+                                Text("echo.editor.daysAhead", bundle: .module)
                                     .foregroundStyle(Theme.textPrimary.opacity(0.75))
 
                                 Spacer(minLength: 0)
