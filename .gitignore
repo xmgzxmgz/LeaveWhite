@@ -47,3 +47,6 @@ Package.resolved
 
 # Misc
 *.log
+
+# SwiftData store
+LeaveWhite.store*
